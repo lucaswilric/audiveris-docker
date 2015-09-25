@@ -47,6 +47,7 @@ RUN     apt-get -y install tesseract-ocr liblept4 libtesseract3 tesseract-ocr-de
 # This is an old version of Audiveris, and could be updated.
 RUN     wget https://kenai.com/projects/audiveris/downloads/download/oldies/audiveris-4.2.3318-ubuntu-amd64.deb -O audiveris.deb
 RUN     dpkg -i audiveris.deb
+RUN chmod +x /usr/bin/audiveris/audiveris.sh
 
 ENV PATH $PATH:/usr/bin/audiveris
 
