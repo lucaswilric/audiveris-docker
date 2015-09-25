@@ -1,4 +1,4 @@
-# This is the docker file for the Modulo7 project
+# This is the docker file for the audiveris-docker project
 FROM    ubuntu:14.04
 
 # Basic message
@@ -28,9 +28,9 @@ RUN apt-get -y install libqt4-dev libgtk2.0-dev
 RUN apt-get -y install libfaac-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev
 RUN apt-get -y install x264 v4l-utils ffmpeg
 RUN apt-get -y install libgtk2.0-dev
-RUN apt-get -y install git wget ghostscript 
+RUN apt-get -y install git wget ghostscript
 
-# Install opencv on the image, its needed for the   
+# Install opencv on the image, its needed for something or other
 RUN     git clone https://github.com/Khalian/Install-OpenCV
 RUN     chmod +x /Install-OpenCV/Ubuntu/2.4/opencv2_4_9.sh
 RUN	    sh /Install-OpenCV/Ubuntu/2.4/opencv2_4_9.sh
@@ -40,14 +40,12 @@ RUN     apt-get -y install openjdk-7-jdk
 
 # The installation of tessaract and audiveris prototypes, under construction
 RUN     apt-get -y install tesseract-ocr liblept4 libtesseract3 tesseract-ocr-deu tesseract-ocr-eng tesseract-ocr-fra tesseract-ocr-ita
+
+# This is an old version of Audiveris, and could be updated.
 RUN     wget https://kenai.com/projects/audiveris/downloads/download/oldies/audiveris-4.2.3318-ubuntu-amd64.deb -O audiveris.deb
 RUN     dpkg -i audiveris.deb
 
-# # Install the gradle version 2.5 for building modulo7, canonical's distribution for gradle is outdated so gradle is installed manually
-# RUN     apt-get -y install wget unzip
-# RUN     wget https://services.gradle.org/distributions/gradle-2.5-bin.zip
-# RUN     unzip gradle-2.5-bin.zip
+ENV PATH $PATH:/usr/bin/audiveris
 
-# # Build the Modulo7 project
-# RUN     git clone https://github.com/Khalian/Modulo7
-# RUN     export PATH=$PATH:/gradle-2.5/bin && cd Modulo7 && gradle build
+# Using an ENTRYPOINT like this would make using the container more like using a command.
+# ENTRYPOINT ["audiveris.sh"]
