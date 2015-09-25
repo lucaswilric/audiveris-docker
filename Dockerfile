@@ -1,5 +1,8 @@
 # This is the docker file for the audiveris-docker project
 FROM    ubuntu:14.04
+MAINTAINER Lucas Wilson-Richter <audiveris-docker@lucasrichter.id.au>
+
+LABEL Description="Audiveris Open Music Scanner, version 4.2.3318"
 
 # Basic message
 RUN echo "Building docker image"
